@@ -1,0 +1,8 @@
+pandas
+pandas_profiling
+geopandas
+scikit-learn
+matplotlib
+tqdm
+jupyter
+jupyterlab
