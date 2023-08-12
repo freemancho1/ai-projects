@@ -1,6 +1,8 @@
 pandas
 pandas_profiling
 geopandas
+folium
+mapclassify
 scikit-learn
 matplotlib
 tqdm
