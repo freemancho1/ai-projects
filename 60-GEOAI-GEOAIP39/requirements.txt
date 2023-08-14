@@ -3,6 +3,8 @@ pandas_profiling
 geopandas
 folium
 mapclassify
+branca          # Using Geopandas Explore
+geopy           # GeoCoding Library
 scikit-learn
 matplotlib
 tqdm
