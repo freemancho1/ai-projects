@@ -4,7 +4,11 @@ geopandas
 folium
 mapclassify
 branca          # Using Geopandas Explore
-geopy           # GeoCoding Library
+geopy           # GeoCoding 
+shapely         # Manipulating Geometric Object
+plotly          # Animation 
+osmnx           # Spatial Data Network Analysis
+descartes       # Used for Plotting Shapely Objects on Matplotlib
 scikit-learn
 matplotlib
 tqdm

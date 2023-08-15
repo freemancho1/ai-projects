@@ -1,7 +1,11 @@
 import os
 import requests
 
-_KEY_FILE_PATH = os.path.join(os.path.expanduser('~'), 'projects', 'naver_application_key.txt')
+_KEY_FILE_PATH = os.path.join(
+    os.path.expanduser('~'), 
+    'projects' if os.name == 'posix' else 'python_projects', 
+    'naver_application_key.txt'
+)
 _API_URL = 'https://naveropenapi.apigw.ntruss.com/map-geocode/v2/geocode'
 
 def _get_request_header():

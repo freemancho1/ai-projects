@@ -1,1 +1,3 @@
 ckpt/
+cache/
+__pycache__/
