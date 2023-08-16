@@ -9,6 +9,9 @@ shapely         # Manipulating Geometric Object
 plotly          # Animation 
 osmnx           # Spatial Data Network Analysis
 descartes       # Used for Plotting Shapely Objects on Matplotlib
+contextily      # Support Spatial Data Visualization
+geoplot         # Support Spatial Data Visualization with Matplotlib
+imageio
 scikit-learn
 matplotlib
 tqdm
