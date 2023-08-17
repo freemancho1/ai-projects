@@ -11,6 +11,10 @@ osmnx           # Spatial Data Network Analysis
 descartes       # Used for Plotting Shapely Objects on Matplotlib
 contextily      # Support Spatial Data Visualization
 geoplot         # Support Spatial Data Visualization with Matplotlib
+colorcet        # Support Color Selection and Mapping in Data Visualization
+datashader      # BigData Visualization
+holoviews       # Support Simplified and Interactive Visualization
+jupyter_bokeh   # Support Interactive Visualization with `holoviews`
 imageio
 scikit-learn
 matplotlib
