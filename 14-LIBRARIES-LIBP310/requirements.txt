@@ -1,4 +1,5 @@
 pandas
 pandas_profiling
+plotly
 jupyter
 jupyterlab

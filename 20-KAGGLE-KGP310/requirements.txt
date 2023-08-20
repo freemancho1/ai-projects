@@ -1,0 +1,7 @@
+pandas
+pandas_profiling
+scikit-learn
+plotly              # Support Interactive Graphs and Visualization
+xgboost
+jupyter
+jupyterlab
