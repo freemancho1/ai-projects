@@ -1,8 +1,0 @@
-pandas
-pandas_profiling
-scikit-learn
-matplotlib
-tqdm
-jupyter
-jupyterlab
-bayesian-optimization

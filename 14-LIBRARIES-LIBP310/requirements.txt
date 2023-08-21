@@ -1,5 +1,6 @@
 pandas
 pandas_profiling
 plotly
+bayesian-optimization
 jupyter
 jupyterlab
