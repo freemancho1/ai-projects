@@ -3,6 +3,7 @@ pandas
 pandas_profiling
 scikit-learn
 matplotlib
+bayesian-optimization
 imageio
 tqdm
 jupyter
