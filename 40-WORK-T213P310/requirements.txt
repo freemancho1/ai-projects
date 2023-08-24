@@ -1,0 +1,15 @@
+tensorflow
+pandas
+pandas_profiling
+scikit-learn
+matplotlib
+bayesian-optimization
+imageio
+tqdm
+jupyter
+jupyterlab
+
+# conda install -c conda-forge lightgbm
+lightgbm
+# conda install -c conda-forge xgboost
+xgboost
