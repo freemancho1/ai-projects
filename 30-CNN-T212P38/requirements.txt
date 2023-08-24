@@ -7,4 +7,9 @@ bayesian-optimization
 imageio
 tqdm
 jupyter
-jupyterlab
+jupyterlab 
+
+# conda install -c conda-forge lightgbm
+lightgbm
+# conda install -c conda-forge xgboost
+xgboost
