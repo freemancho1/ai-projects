@@ -4,6 +4,8 @@ pandas_profiling
 matplotlib
 bayesian-optimization
 # scikit-learn -> bayesian-optimization
+xlrd        # excel
+statsmodels
 imageio
 tqdm
 jupyter
