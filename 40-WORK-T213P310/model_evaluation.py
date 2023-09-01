@@ -15,7 +15,7 @@ def user_mape(y_test, pred):
     abs_err = np.abs(y_test - pred)
     y_test = y_test + epsilon
     
-    pct_err = np.where(abs_err == 0, 0, abs_err / y_test * 100)
+    pct_err = np.where(abs_err == 0, 0, abs_err / y_test * 100) 
 
     # for i in range(len(pct_err)):
     #     if pct_err[i] > 100:
