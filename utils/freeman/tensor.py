@@ -32,6 +32,10 @@ class MakeWindow():
         self.drop_remainder = drop_remainder
         self.col_indices = None
         
+        self._train_data = None
+        self._valid_data = None
+        self._test_data = None
+        
         self._check_args()
         self._make_window()
         self.spec
@@ -66,12 +70,70 @@ class MakeWindow():
             
         self.win_data = ds.batch(self.batch_size).prefetch(self.prefetch_size)
         
-    @property
-    def spec(self):
+    def slices(self, size=[60, 20, 20]):
+        len_size = len(size)
+        if len_size == 1:
+            if size[0] > 40 and size[0] < 90 :
+                train_size = size[0]
+                valid_size = 0
+                test_size = 100 - size[0]
+            else:
+                self._display_error(
+                    'The size of the training data should be between 40% and 90%\n'
+                    f'Currently, the input value is `{size[0]}%`.'
+                )
+        elif len_size == 2:
+            sum_size = np.sum(size)
+            if sum_size == 100:
+                train_size = size[0]
+                valid_size = 0
+                test_size = size[1]
+            else:
+                self._diplay_error(
+                    'The size of the training and test data should sum up to 100%.\n'
+                    f'Currently, the input values are {size[0]}% and {size[1]}%.'
+                )
+        elif len_size == 3:
+            sum_size = np.sum(size)
+            if sum_size == 100:
+                train_size = size[0]
+                valid_size = size[1]
+                test_size = size[2]
+            else:
+                self._diplay_error(
+                    'The size of the training, validation and test data should sum up to 100%.\n'
+                    f'Currently, the input values are {size[0]}%, {size[1]}% and {size[2]}%.'
+                )
+        else:
+            self._display_error(
+                'Data splitting should involve three sets: training, validation and test data.\n'
+                f'Currently, {len_size} sets have been input.'
+            )
+            
+        _train_size = int(self.batch_data_size * train_size / 100)
+        _valid_size = int(self.batch_data_size * valid_size / 100)
+        _test_size = int(self.batch_data_size * test_size / 100)
+        
+        self._train_data = self.win_data.take(_train_size)
+        _remaining_data = self.win_data.skip(_train_size)
+        self._valid_data = _remaining_data.take(_valid_size)
+        self._test_data = _remaining_data.skip(_valid_size)
+        
+        print('Train Data:')
+        self._win_spec(self._train_data)
+        if _valid_size != 0:
+            print('Valid Data:')
+            self._win_spec(self._valid_data)
+        print('Test Data:')
+        self._win_spec(self._test_data)
+        
+    def _win_spec(self, ds=None):
         batch_data_size = 0
         total_data_size = 0
         
-        for x, y in self.win_data.take(-1):
+        _ds = self.win_data if ds is None else ds
+        
+        for x, y in _ds.take(-1):
             if batch_data_size == 0:
                 print(f'Batch dataset shape: features{x.shape}, label{y.shape}')
             batch_data_size += 1
@@ -83,6 +145,32 @@ class MakeWindow():
             f'Total dataset row size: {total_data_size} = '
             f'{self.batch_size} * ({batch_data_size} - 1) + {x.shape[0]}'
         )
+        
+        if ds is None:
+            self.batch_data_size = batch_data_size
+            self.input_shape = x.shape[1:]
+        
+    @property
+    def spec(self):
+        self._win_spec()
+        
+    @property
+    def train(self):
+        if self._train_data is None:
+            self.slices()
+        return self._train_data
+    
+    @property
+    def valid(self):
+        if self._valid_data is None:
+            self.slices()
+        return self._valid_data
+    
+    @property
+    def test(self):
+        if self._test_data is None:
+            self.slices()
+        return self._test_data
     
     """
     _check_args(): 
@@ -252,4 +340,4 @@ def dataset_spec(ds):
             if batch_data_size == 0: 
                 print('Data shape: 1')
             batch_data_size += 1
-        print(f'Batch data size: {batch_data_size}')
+        print(f'Batch data size: {batch_data_size}') 
