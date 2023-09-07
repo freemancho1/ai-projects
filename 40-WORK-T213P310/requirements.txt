@@ -32,3 +32,5 @@ datashader      # BigData Visualization
 holoviews       # Support Simplified and Interactive Visualization
 jupyter_bokeh   # Support Interactive Visualization with `holoviews`
 imageio
+
+openpyxl
