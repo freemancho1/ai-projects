@@ -59,8 +59,8 @@ def f_importances(model, columns, title):
 def plot_actual_pred(y_test, pred, title):
     plt.figure(figsize=(12,6))
     x = range(len(y_test))
-    plt.plot(x, y_test, label='Actual', linestyle='-')
-    plt.plot(x, pred, label='Prediction', linestyle='--')
+    plt.plot(x, y_test, label='실측값', linestyle='-')
+    plt.plot(x, pred, label='예측값', linestyle='--')
     plt.xlabel('공사 단위')
     plt.ylabel('총공사비')
     plt.title(title)
