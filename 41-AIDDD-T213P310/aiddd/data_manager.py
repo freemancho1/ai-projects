@@ -51,7 +51,7 @@ _PATH_READ_WRITE_FILES = {
 
 _IS_SETTING = False
 
-def read_data(type):
+def read_data(type, nrows=None):
     global _IS_SETTING
     
     if _IS_SETTING == False:
@@ -68,9 +68,11 @@ def read_data(type):
         file_path = _PATH_READ_FILES[type]
     except KeyError as ke:
         file_path = _PATH_READ_WRITE_FILES[type]
+        
     # 파일확장자를 비교해 읽는 함수를 결정
     file_ext = os.path.splitext(file_path)[1]
-    return pd.read_excel(file_path) if file_ext.lower() == '.xlsx' else pd.read_csv(file_path)
+    return pd.read_excel(file_path, nrows=nrows) if file_ext.lower() == '.xlsx' \
+        else pd.read_csv(file_path, nrows=nrows)
     
 # get_data = lambda type: pd.read_excel(_PATH_FILES[type])
 
