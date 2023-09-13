@@ -35,10 +35,10 @@ _PATH_READ_FILES = {
     '설계 전주':    _get_path('1st', '설계', '설계 추출내역', '계약전력등추가', '5개년 전주 설계 추출내역_계약전력등추가.xlsx'),
     '설계 접지':    _get_path('1st', '설계', '설계 추출내역', '계약전력등추가', '5개년 접지 설계 추출내역_계약전력등추가.xlsx'),
     '설계 지지선':  _get_path('1st', '설계', '설계 추출내역', '계약전력등추가', '5개년 지지선 설계 추출내역_계약전력등추가.xlsx'),
-    '2ndCONS': _get_path('2nd', 'soc', 'CONS_INFO.xlsx'),
-    '2ndLINE': _get_path('2nd', 'soc', 'LINE_DATA.xlsx'),
-    '2ndPOLE': _get_path('2nd', 'soc', 'POLE_DATA.xlsx'),
-    '2ndSL': _get_path('2nd', 'soc', 'SL_DATA.xlsx'),
+    '2nd CONS': _get_path('2nd', 'soc', 'CONS_INFO.xlsx'),
+    '2nd LINE': _get_path('2nd', 'soc', 'LINE_DATA.xlsx'),
+    '2nd POLE': _get_path('2nd', 'soc', 'POLE_DATA.xlsx'),
+    '2nd SL': _get_path('2nd', 'soc', 'SL_DATA.xlsx'),
 }
 
 _PATH_READ_WRITE_FILES = {
