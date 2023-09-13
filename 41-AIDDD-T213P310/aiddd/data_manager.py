@@ -51,13 +51,20 @@ _PATH_READ_WRITE_FILES = {
     '1st전처리 공사비+설계기별': _get_path('1st', '전처리데이터', '전처리공사비_설계기별.csv'),
     # '전처리 설계전선': _get_path('전처리데이터', '전처리 설계전선.csv'),
     # '전처리 설계전주': _get_path('전처리데이터', '전처리 설계전주.csv'),
+
+    # 대상: 불필요컬럼 제거, 접수종류명 신설(상용/임시), 계약전력 100미만
+    # 02-pp-cons.ipynb
+    '2nd pp cons1': _get_path('2nd', 'pp', 'cons1.csv'),
+
     '2nd stats': _get_path('2nd', 'pp', 'stats_all.csv'),
+    
+    '2nd stats_cnt': _get_path('2nd', 'pp', 'stats_cnt.csv'),
     '2nd stats_target': _get_path('2nd', 'pp', 'stats_target.csv')
 }
 
 _IS_SETTING = False
 
-def read_data(type, nrows=None):
+def read_data(type, **kwargs):
     global _IS_SETTING
     
     if _IS_SETTING == False:
@@ -77,11 +84,11 @@ def read_data(type, nrows=None):
         
     # 파일확장자를 비교해 읽는 함수를 결정
     file_ext = os.path.splitext(file_path)[1]
-    return pd.read_excel(file_path, nrows=nrows) if file_ext.lower() == '.xlsx' \
-        else pd.read_csv(file_path, nrows=nrows)
+    return pd.read_excel(file_path, **kwargs) if file_ext.lower() == '.xlsx' \
+        else pd.read_csv(file_path, **kwargs)
     
 # get_data = lambda type: pd.read_excel(_PATH_FILES[type])
 
-def write_data(type, df, index=False):
+def write_data(type, df, **kwargs):
     # 전처리 이후 파일은 무조건 csv파일로 관리
-    df.to_csv(_PATH_READ_WRITE_FILES[type], index=index)
+    df.to_csv(_PATH_READ_WRITE_FILES[type], **kwargs)
