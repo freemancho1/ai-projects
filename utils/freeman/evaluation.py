@@ -8,21 +8,16 @@ from sklearn.metrics import r2_score
 import matplotlib.pyplot as plt
 
 def user_mape(y_test, pred):
-    # 예측대상(test_y)값이 0인 경우를 대비해, 
-    # 0이 아닌 아주 작은수를 더해 MAPE값을 구함
-    epsilon = 1e-10
+    max_value = max(np.max(y_test), 1)
+    mape = 0
     
-    abs_err = np.abs(y_test - pred)
-    y_test = y_test + epsilon
+    data_size = len(y_test)
     
-    pct_err = np.where(abs_err == 0, 0, abs_err / y_test * 100) 
-
-    # for i in range(len(pct_err)):
-    #     if pct_err[i] > 100:
-    #         print(y_test[i], pred[i], pct_err[i])
-    pct_err = np.minimum(pct_err, 100)
-    
-    return np.mean(pct_err)
+    for i in range(data_size):
+        (y, p) = (max_value, pred[i]+max_value) if y_test[i] < 1 else (y_test[i], pred[i])
+        mape += abs((y-p) / y) * 100
+        
+    return mape / data_size
 
 def regression_evaluation(y_test, pred, verbose=1):
     # 모든값을 소숫점 5자리에서 반올림(np 자체의 버그인지 일단 해결하기 위함)
@@ -34,16 +29,16 @@ def regression_evaluation(y_test, pred, verbose=1):
     mae = mean_absolute_error(y, p)
     r2score = r2_score(y, p)
     mape = mean_absolute_percentage_error(y, p)
-    mape2 = user_mape(y, p)
+    # mape2 = user_mape(y, p)
     
     if verbose != 0:
         print(
-            f'R2_SCORE: {r2score:.6f}, MAPE2: {mape2:.6f}, '
+            f'R2_SCORE: {r2score:.6f}, MAPE: {mape*100:.6f}, '
             f'MSE: {mse:.6f}, RMSE: {rmse:.6f}, '
-            f'MAPE: {mape:.6f}, MAE: {mae:.6f}'
+            f'MAE: {mae:.6f}'
         )
         
-    return mse, rmse, mae, mape, mape2
+    return [r2score, mape, mse, rmse, mae]
 
 def f_importances(model, columns, title):
     _f_importances = model.feature_importances_

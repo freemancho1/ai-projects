@@ -52,9 +52,15 @@ _PATH_READ_WRITE_FILES = {
     # '전처리 설계전선': _get_path('전처리데이터', '전처리 설계전선.csv'),
     # '전처리 설계전주': _get_path('전처리데이터', '전처리 설계전주.csv'),
 
-    # 대상: 불필요컬럼 제거, 접수종류명 신설(상용/임시), 계약전력 100미만
-    # 02-pp-cons.ipynb
+    # 대상: 불필요컬럼 제거, 접수종류명 신설(상용/임시), 계약전력 100미만,
+    #       총공사비 1억 이하, 공사형태명: 외선소요
+    # 컬럼: 7개('공사번호', '총공사비', '최종변경일시', '최종변경자사번', '사번코드', 
+    #       '사업소명', '계약전력') 
+    # 10-pp-cons.ipynb
     '2nd pp cons1': _get_path('2nd', 'pp', 'cons1.csv'),
+    # '2nd pp cons1'의 공사비를 기준으로 각 설비의 갯 수 계산
+    # 11-pp-cnts-on-cons.ipynb
+    '2nd pp cnts1': _get_path('2nd', 'pp', 'cnts_on_cons.csv'),
 
     '2nd stats': _get_path('2nd', 'pp', 'stats_all.csv'),
     
