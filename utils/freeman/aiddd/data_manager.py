@@ -38,8 +38,14 @@ PREPROCESSED_DATA_FILES = {
     # 3rd: bb-pp-device-counts-base-on-cons.ipynb <- '3rd pp cons-1st'
     '3rd pp counts-base-on-cons-1st': ['3rd', 'preprocessed_data', 'counts-base-on-cons-1st.csv'],
     '3rd pp counts-base-on-cons-1st-all': ['3rd', 'preprocessed_data', 'counts-base-on-cons-1st-all.csv'],
+    # 3rd: bc-pp-pole-base-on-cons.ipynb <- '3rd pp counts-base-on-cons-1st'
+    '3rd pp pole-base-on-cons-1st': ['3rd', 'preprocessed_data', 'pole-base-on-cons-1st.csv'],
+    # 3rd: bd-pp-line-base-on-cons.ipynb <- '3rd pp counts-base-on-cons-1st'
+    '3rd pp line-base-on-cons-1st': ['3rd', 'preprocessed_data', 'line-base-on-cons-1st.csv'],    
+    # 3rd: be-pp-pole-sequence-bo-line.ipynb
+    '3rd pp pole-sequence-bo-line': ['3rd', 'preprocessed_data', 'pole-sequence-bo-line.csv']
     # 3rd: bc-pp-pole-position-base-on-cons.ipynb <- '3rd pp counts-base-on-cons-1st'
-    '3rd pp pole-position-on-cons-1st': ['3rd', 'preprocessed_data', 'pole-position-base-on-cons-1st.csv'],
+    # '3rd pp pole-position-on-cons-1st': ['3rd', 'preprocessed_data', 'pole-position-base-on-cons-1st.csv'],
 }
 
 # DATA_FILES = PROVIDED_DATA_FILES + PREPROCESSED_DATA_FILES
