@@ -2,67 +2,17 @@ import os
 import warnings
 import pandas as pd
 
-DATA_BASE_PATH = os.path.join(
-    os.path.expanduser('~'),
-    'projects',
-    'data',
-    'AIDDD'
-)
+BASE_DATA_PATH = os.path.join(os.path.expanduser('~'), 'projects', 'data', 'AIDDD')
 
-# cons: 공사비, line: 전선, pole: 전주, sl: service line(인입선)
-PROVIDED_DATA_FILES = {
-    # 2차: 공사비, 전주/전선/인입주
-    '2nd provide cons': ['2nd', 'provided_data', 'CONS_INFO.xlsx'],
-    '2nd provide line': ['2nd', 'provided_data', 'LINE_DATA.xlsx'],
-    '2nd provide pole': ['2nd', 'provided_data', 'POLE_DATA.xlsx'],
-    '2nd provide sl':   ['2nd', 'provided_data', 'SL_DATA.xlsx'],
-    # 3차: 전주/전선/인입주
-    '3rd provide line': ['3rd', 'provided_data', 'LINE_DATA.xlsx'],
-    '3rd provide pole': ['3rd', 'provided_data', 'POLE_DATA.xlsx'],
-    '3rd provide sl':   ['3rd', 'provided_data', 'SL_DATA.xlsx'],
-} 
-
-PREPROCESSED_DATA_FILES = {
-    # 2nd: ba-pp-cons.ipynb
-    '2nd pp cons-1st': ['2nd', 'preprocessed_data', 'cons-1st.csv'],
-    '2nd pp cons-1st-all': ['2nd', 'preprocessed_data', 'cons-1st-all.csv'],
-    # 2nd: bb-pp-device-counts-base-on-cons.ipynb <- '2nd pp cons-1st'
-    '2nd pp counts-base-on-cons-1st': ['2nd', 'preprocessed_data', 'counts-base-on-cons-1st.csv'],
-    # 2nd: bc-pp-pole-position-base-on-cons.ipynb <- '2nd pp counts-base-on-cons-1st'
-    '2nd pp pole-position-on-cons-1st': ['2nd', 'preprocessed_data', 'pole-position-base-on-cons-1st.csv'],
-    
-    # 2nd vs 3rd: 전처리 후 컬럼명 영문으로 변경, 좌표값
-    # 3rd: ba-pp-cons.ipynb
-    '3rd pp cons-1st': ['3rd', 'preprocessed_data', 'cons-1st.csv'],
-    '3rd pp cons-1st-all': ['3rd', 'preprocessed_data', 'cons-1st-all.csv'],
-    # 3rd: bb-pp-device-counts-base-on-cons.ipynb <- '3rd pp cons-1st'
-    '3rd pp counts-base-on-cons-1st': ['3rd', 'preprocessed_data', 'counts-base-on-cons-1st.csv'],
-    '3rd pp counts-base-on-cons-1st-all': ['3rd', 'preprocessed_data', 'counts-base-on-cons-1st-all.csv'],
-    # 3rd: bc-pp-pole-base-on-cons.ipynb <- '3rd pp counts-base-on-cons-1st'
-    '3rd pp pole-base-on-cons-1st': ['3rd', 'preprocessed_data', 'pole-base-on-cons-1st.csv'],
-    # 3rd: bd-pp-line-base-on-cons.ipynb <- '3rd pp counts-base-on-cons-1st'
-    '3rd pp line-base-on-cons-1st': ['3rd', 'preprocessed_data', 'line-base-on-cons-1st.csv'],    
-    # 3rd: be-pp-pole-sequence-bo-line.ipynb
-    '3rd pp pole-sequence-bo-line': ['3rd', 'preprocessed_data', 'pole-sequence-bo-line.csv']
-    # 3rd: bc-pp-pole-position-base-on-cons.ipynb <- '3rd pp counts-base-on-cons-1st'
-    # '3rd pp pole-position-on-cons-1st': ['3rd', 'preprocessed_data', 'pole-position-base-on-cons-1st.csv'],
-}
-
-# DATA_FILES = PROVIDED_DATA_FILES + PREPROCESSED_DATA_FILES
-DATA_FILES = PROVIDED_DATA_FILES
-DATA_FILES.update(PREPROCESSED_DATA_FILES)
-
-def get_path(file_key):
-    try:
-        file_path = DATA_FILES[file_key]
-    except KeyError as ke:
-        raise KeyError(f'Key of File `{file_key}` does not Exist.')
-    joined_path = [DATA_BASE_PATH] + file_path
-    return os.path.join(*joined_path)
+def get_path(filename, data_type='preprocess', process_seq='3rd'):
+    file_extension = '.xlsx' if data_type=='provide' else '.csv'
+    dir_name = 'preprocessed_data' if data_type=='preprocess' else 'provided_data'
+    full_path = [BASE_DATA_PATH, process_seq, dir_name, f'{filename}{file_extension}']
+    return os.path.join(*full_path), file_extension
 
 IS_USER_WARNING_SETTING = False
 
-def read_data(file_key, **kwargs):
+def read_data(filename, data_type='preprocess', process_seq='3rd', **kwargs):
     global IS_USER_WARNING_SETTING
     if not IS_USER_WARNING_SETTING:
         IS_USER_WARNING_SETTING = True
@@ -73,17 +23,24 @@ def read_data(file_key, **kwargs):
             category=UserWarning,
             module='openpyxl.styles.stylesheet'
         )
-    
-    read_file_path = get_path(file_key)
-    file_extension = os.path.splitext(read_file_path)[1]
+        
+    full_path, file_extension = get_path(filename, data_type, process_seq)
     if file_extension.lower() == '.xlsx':
-        return pd.read_excel(read_file_path, **kwargs)
+        return pd.read_excel(full_path, **kwargs)
     else:
-        return pd.read_csv(read_file_path, **kwargs)
+        return pd.read_csv(full_path, **kwargs)
     
-def write_data(file_key, dataframe, **kwargs):
-    write_file_path = get_path(file_key)
+def write_data(filename, dataframe, process_seq='3rd', **kwargs):
+    full_path, _ = get_path(filename, 'preprocess', process_seq)
     if 'index' not in kwargs:
         kwargs['index'] = False
-    dataframe.to_csv(write_file_path, **kwargs)
+    dataframe.to_csv(full_path, **kwargs)
     
+common_columns = {
+    '공사번호': 'cons_id',              # Construction ID
+    '총공사비': 'total_cons_cost',      # Total Construction Cost
+    '최종변경일시': 'last_mod_date',    # Last Modification Date and Time
+    '최종변경자사번': 'last_mod_eid',   # Last Modification Employee ID
+    '사업소명': 'office_name',
+    '계약전력': 'cont_cap',             # Contracted Capacity
+}
