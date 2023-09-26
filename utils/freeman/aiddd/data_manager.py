@@ -43,4 +43,18 @@ common_columns = {
     '최종변경자사번': 'last_mod_eid',   # Last Modification Employee ID
     '사업소명': 'office_name',
     '계약전력': 'cont_cap',             # Contracted Capacity
+    '전산화번호': 'comp_id',
+    '전원측전산화번호': 'from_comp_id',
+    'GISID': 'gis_id',
+    '전주형태코드': 'pole_shape_cd',
+    '전주종류코드': 'pole_type_cd',
+    '전주규격코드': 'pole_spec_cd',
+    'X좌표-Y좌표': 'coordinate', 
+    '결선방식코드': 'wiring_scheme',
+    '지지물간거리': 'span',
+    '전선종류코드1': 'line_type_cd',
+    '전선규격코드1': 'line_spec_cd',
+    '전선조수1': 'line_phase_cd',
+    '중성선종류코드': 'neutral_type_cd',
+    '중성선규격코드': 'neutral_spec_cd'
 }
