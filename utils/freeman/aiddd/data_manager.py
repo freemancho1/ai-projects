@@ -56,5 +56,8 @@ common_columns = {
     '전선규격코드1': 'line_spec_cd',
     '전선조수1': 'line_phase_cd',
     '중성선종류코드': 'neutral_type_cd',
-    '중성선규격코드': 'neutral_spec_cd'
+    '중성선규격코드': 'neutral_spec_cd',
+    '인입전선종류코드': 'sl_type_cd',
+    '고객공급선규격코드': 'sl_spec_cd',
+    '조수': 'supervisor',
 }
