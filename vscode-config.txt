@@ -1,0 +1,47 @@
+{
+    "window.zoomLevel": 0.4,
+    "window.titleBarStyle": "custom",
+    "workbench.startupEditor": "none",
+    "notebook.showCellStatusBar": "visible",
+    "notebook.output.fontSize": 17,
+    "editor.minimap.enabled": false,
+    "git.enableSmartCommit": true,
+    "notebook.lineNumbers": "on",
+    "git.autofetch": true,
+    "git.confirmSync": false,
+    "editor.fontFamily": "'Ubuntu Mono'",
+    "editor.fontSize": 17,
+    "workbench.colorCustomizations" : {
+        "statusBar.background": "#eeeeee",
+        "statusBar.foreground": "#666666"
+    },
+    "terminal.integrated.inheritEnv": false,
+    "terminal.integrated.fontSize": 18,
+    "terminal.integrated.lineHeight": 1,
+    "vsicons.dontShowNewVersionMessage": true,
+    "python.analysis.extraPaths": [
+        "/home/freeman/projects",
+        "/home/freeman/projects/freeman",
+    ],
+    "jupyter.widgetScriptSources": [
+        "jsdelivr.com",
+        "unpkg.com"
+    ],
+    "[python]": {
+        "editor.formatOnType": true
+    },
+    "cSpell.enabled": false,
+    "files.autoSave": "onFocusChange",
+    "workbench.colorTheme": "Visual Studio Light",
+    "workbench.sideBar.location": "right",
+    "workbench.statusBar.visible": false,
+
+    "python.terminal.activateEnvironment": true,
+    "python.terminal.launchArgs": [
+        "-m",
+        "IPython",
+        "--no-autoindent",
+        "--no-pprint",
+        "--simple-prompt"
+    ]
+}
