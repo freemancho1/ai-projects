@@ -3,12 +3,13 @@ from datetime import datetime
 import aiddd.app.config as CFG
 
 class Log:
-    def __init__(self):
+    def __init__(self, message='로그 시작'):
         self._unique_id = str(uuid.uuid4()).split('-')[-1]
         self._start_time = None
         self._end_time = None
+        self._start(message)
         
-    def start(self, message):
+    def _start(self, message):
         if CFG.IS_DEBUG_MODE:
             self._start_time = datetime.now()
             print(f'[{self._unique_id}][{self._start_time}] {message}')

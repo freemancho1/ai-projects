@@ -5,13 +5,14 @@ import aiddd.app.config as CFG
 from aiddd.utils.logs import Log
 from aiddd.utils.data_manager import write_data, get_rename_columns
 
-def preprocess(provide_data):
+def preprocess(provide_data): 
     logs_preprocess = Log()
-    logs_preprocess.start('전처리 작업 시작...')
+    logs_preprocess.start('전처리 작업 시작...') 
     
     df_training = _preprocess_cons(provide_data['cons'], 'cons')
     df_training = _compute_facilities_count(provide_data, df_training)
     df_training = _preprocess_pole(provide_data['pole'], 'pole', df_training)
+    df_training = _preprocess_line(provide_data['line'], 'line', )
     
     logs_preprocess.stop('전처리 작업 종료...')
     
@@ -197,4 +198,6 @@ def _preprocess_pole(df_pole, dtype, df_training):
         f'전주정보 전처리 후 최종 학습 데이터 형태: {df_training.shape}'
     )
     return df_training
-    
+
+def _preprocess_line(df_line, dtype, df_training):
+    pass
